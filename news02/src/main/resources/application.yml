@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: news02
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
