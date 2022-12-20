@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user01
+    name: user
   cloud:
     nacos:
       discovery:
