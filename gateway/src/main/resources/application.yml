@@ -18,24 +18,24 @@ spring:
           filters:
             - StripPrefix=1
               # 降级配置
-            - name: Hystrix
-              args:
-                name: testOne
-                # 降级接口的地址
-                fallbackUri: forward:/error
+#            - name: Hystrix
+#              args:
+#                name: testOne
+#                # 降级接口的地址
+#                fallbackUri: forward:/error
 # 针对全局配置
-hystrix:
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: true
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000
-    # 对单独的 Hystrix 的 commandKey 设置超时时间
-    testOne:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 3000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
+#    # 对单独的 Hystrix 的 commandKey 设置超时时间
+#    testOne:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
