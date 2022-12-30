@@ -11,6 +11,12 @@ spring:
           # 从nacos中获取服务名
           enabled: true
       routes:
+        - id: b_routes
+          uri: lb://news
+          predicates:
+            - Path=/news/**
+          filters:
+            - StripPrefix=1
         - id: a_routes
           uri: lb://user
           predicates:

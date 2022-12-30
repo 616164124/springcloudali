@@ -1,6 +1,6 @@
 spring:
   application:
-    name: news01
+    name: news
   cloud:
     nacos:
       discovery:

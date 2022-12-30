@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 /**
  * resultCode,resultMsg  必须从ResetCodeEnum中获取
@@ -177,5 +178,130 @@ public class ServiceResult implements Serializable {
 
     public ServiceResult restCode(RestCodeEnum restCodeEnum) {
         return this.putMsg(restCodeEnum.getMsg()).putCode(restCodeEnum.getCode());
+    }
+    /**
+     * code = u.getCode();
+     * msg = u.getMsg();
+     * data = data;
+     *
+     * @param u
+     * @param data
+     */
+    public static ServiceResult setEnum(CodeEnum u, Object data) {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.resultCode = u.getCode();
+        serviceResult.resultMsg = u.getMsg();
+        serviceResult.flag = u.isFlag();
+        serviceResult.resultObj = data;
+        return serviceResult;
+    }
+
+    /**
+     * code = CodeEnum.SUCCESS.getCode();
+     * msg = CodeEnum.SUCCESS.getMsg();
+     * data = data;
+     *
+     * @param data
+     */
+    public static ServiceResult successObject(Object data) {
+        ServiceResult serviceResult = ServiceResult.setEnum(CodeEnum.SUCCESS, data);
+        return serviceResult;
+    }
+
+    /**
+     * serviceResult.code = u.getCode();
+     * serviceResult.msg = u.getMsg();
+     * serviceResult.data = data;
+     *
+     * @param u
+     * @param data
+     * @return serviceResult
+     */
+    public static ServiceResult success(CodeEnum u, Object data) {
+        return ServiceResult.setEnum(CodeEnum.SUCCESS, data);
+    }
+
+    /**
+     * SUCCESS("000000", "成功", false),
+     * null
+     *
+     * @return
+     */
+    public static ServiceResult defaultSuccess() {
+        return ServiceResult.setEnum(CodeEnum.SUCCESS, null);
+    }
+
+    /**
+     * ERROR("99999", "错误", false),
+     * data=null
+     *
+     * @return
+     */
+    public static ServiceResult defaultError() {
+        return ServiceResult.setEnum(CodeEnum.ERROR, null);
+    }
+
+    /**
+     * code = u.getCode();
+     * msg = u.getMsg();
+     * flag=u.isFlag();
+     * data=o
+     *
+     * @param u
+     */
+    public static ServiceResult error(CodeEnum u, Object o) {
+        return ServiceResult.setEnum(u, o);
+    }
+
+    /**
+     * code = u.getCode();
+     * msg = e.getMessage();
+     * flag=u.getFlag();
+     * data = e
+     *
+     * @param u
+     * @param e
+     */
+    public static ServiceResult setException(CodeEnum u, Exception e) {
+        ServiceResult serviceResult = ServiceResult.setEnum(u, e);
+        serviceResult.setResultMsg(e.getMessage());
+        return serviceResult;
+    }
+
+    /**
+     * serviceResult.code = CodeEnum.ERROR.getCode();
+     * serviceResult.msg = msg;
+     * serviceResult.flag=true;
+     * 尽量不要用，用多了代码容易混乱，建议使用MsgEnum来拼接msg
+     *
+     * @param msg
+     * @return
+     */
+    @Deprecated
+    public static ServiceResult setErrorMsg(String msg, boolean flag) {
+        ServiceResult serviceResult = ServiceResult.setEnum(CodeEnum.ERROR, null);
+        serviceResult.setResultMsg(msg);
+        serviceResult.setFlag(flag);
+        return serviceResult;
+    }
+
+    /**
+     * 从数据库中获取的错误码
+     * map的形式
+     * "msg" -> "未知错误"
+     * "code" -> "99922"
+     * "flag" -> "1"
+     * "system" -> "pokweb"
+     *
+     * @param map
+     * @return
+     */
+    @Deprecated
+    public static ServiceResult setErrorMap(Map<String, String> map) {
+        ServiceResult serviceResult = new ServiceResult();
+        serviceResult.setResultCode(map.get("code"));
+        serviceResult.setResultMsg(map.get("msg"));
+        serviceResult.setFlag("0".equals(map.get("flag")) ? false : true);
+        return serviceResult;
     }
 }

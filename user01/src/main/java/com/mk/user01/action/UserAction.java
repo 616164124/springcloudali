@@ -19,5 +19,10 @@ public class UserAction {
         log.info("one===>"+port);
         return "one===>"+port;
     }
+    @RequestMapping(value = "two",method = RequestMethod.GET)
+    public String getUser02(){
+        log.info("one===>"+port);
+        return "one===>"+port;
+    }
 
 }
