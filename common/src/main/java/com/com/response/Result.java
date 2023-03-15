@@ -2,69 +2,45 @@ package com.com.response;
 
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
- * @Description: 返回数据统一化
+ * 返回的类型为HashMap，可以新增多个键值对
  */
 public class Result extends HashMap<String, Object> {
-    private final static long serialVersionUID = 21900790541721712L;
+    private static final long serialVersionUID = -1L;
 
     public Result() {
-        put("code", RestCodeEnum.SUCCESS.getCode());
-        put("msg", RestCodeEnum.SUCCESS.getMsg());
+        put("code", CodeEnum.SUCCESS.getCode());
+        put("msg", CodeEnum.SUCCESS.getMsg());
+        put("data", null);
+    }
+
+    public Result(CodeEnum u) {
+        put("code", u.getCode());
+        put("msg", u.getMsg());
+        put("data", null);
+    }
+
+    public static Result putEnum(CodeEnum u, Object o) {
+        Result result = new Result();
+        result.put("code", u.getCode());
+        result.put("msg", u.getMsg());
+        result.put("data", o);
+        return result;
     }
 
     /**
-     * @Description: 返回 msg="未知异常，请联系管理员"
+     * 新增一个 Key Value
+     *
+     * @param u     codeEnum
+     * @param key   Key
+     * @param value object
+     * @return result
      */
-    public static Result error() {
-        return error(HttpStates.Server_Error_Msg, "未知异常，请联系管理员");
+    public static Result addKV(CodeEnum u, Object o, String key, Object value) {
+        Result result = Result.putEnum(u, o);
+        result.put(key, value);
+        return result;
     }
 
-    public static Result error(String msg) {
-        return error(HttpStates.Server_Error_Msg, msg);
-    }
-
-    public static Result error(int code, String msg) {
-        Result r = new Result();
-        r.put("code", code);
-        r.put("msg", msg);
-        return r;
-    }
-
-    public static Result ok(String msg) {
-        Result r = new Result();
-        r.put("msg", msg);
-        return r;
-    }
-
-    public static Result ok(Map<String, ?> map) {
-        Result r = new Result();
-        r.putAll(map);
-        return r;
-    }
-
-    public static Result ok() {
-        return new Result();
-    }
-
-    public Result put(String key, Object value) {
-        super.put(key, value);
-        return this;
-    }
-
-    public Result putResult(Object value) {
-        super.put("result", value);
-        return this;
-    }
-
-    public Object getResult() {
-        return super.get("result");
-    }
-
-    public static void main(String[] args) {
-        Result result = new Result();
-        System.out.println(result);
-    }
 }

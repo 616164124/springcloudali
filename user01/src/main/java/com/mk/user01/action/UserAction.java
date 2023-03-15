@@ -1,11 +1,16 @@
 package com.mk.user01.action;
 
+import com.com.bean.User;
+import com.mk.common.ServiceResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController("user")
 public class UserAction {
@@ -14,15 +19,19 @@ public class UserAction {
     @Value("${server.port}")
     private String port;
 
-    @RequestMapping(value = "one",method = RequestMethod.GET)
-    public String getUser01(){
-        log.info("one===>"+port);
-        return "one===>"+port;
+    @RequestMapping(value = "one", method = RequestMethod.POST)
+    public ServiceResult getUser01(HttpServletRequest request, @RequestBody User o) {
+//        int i =1/0;
+        String token = request.getHeader("token");
+        log.info(token+"one===>" + port);
+        log.info(o.getPassword());
+        return ServiceResult.successObject(port);
     }
-    @RequestMapping(value = "two",method = RequestMethod.GET)
-    public String getUser02(){
-        log.info("one===>"+port);
-        return "one===>"+port;
+
+    @RequestMapping(value = "two", method = RequestMethod.GET)
+    public String getUser02() {
+        log.info("one===>" + port);
+        return "one===>" + port;
     }
 
 }

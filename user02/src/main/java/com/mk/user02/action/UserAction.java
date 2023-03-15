@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController("user")
 public class UserAction {
 
@@ -15,7 +17,7 @@ public class UserAction {
     private String port;
 
     @RequestMapping(value = "one",method = RequestMethod.GET)
-    public String getUser01(){
+    public String getUser01(HttpServletRequest request){
         log.info("one===>"+port);
         return "one===>"+port;
     }
