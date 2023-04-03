@@ -16,7 +16,7 @@ public class ServiceResult implements Serializable {
     private String msg = CodeEnum.SUCCESS.getMsg();
     private Object data = null;
     /**
-     * 返回的信息是否展示，true 前端要展示msg中的内容
+     * 返回的信息是否展示;true 前端要展示msg中的内容
      */
     private boolean flag = false;
 
@@ -108,7 +108,7 @@ public class ServiceResult implements Serializable {
      * @return serviceResult
      */
     public static ServiceResult success(CodeEnum u, Object data) {
-        return ServiceResult.setEnum(CodeEnum.SUCCESS, data);
+        return ServiceResult.setEnum(u, data);
     }
 
     /**

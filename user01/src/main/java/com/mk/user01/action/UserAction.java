@@ -23,8 +23,8 @@ public class UserAction {
     public ServiceResult getUser01(HttpServletRequest request, @RequestBody User o) {
 //        int i =1/0;
         String token = request.getHeader("token");
-        log.info(token+"one===>" + port);
-        log.info(o.getPassword());
+        log.info(token+"===one===>" + port);
+        log.info(o.getPokid());
         return ServiceResult.successObject(port);
     }
 
