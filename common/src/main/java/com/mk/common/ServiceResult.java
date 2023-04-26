@@ -1,6 +1,7 @@
 package com.mk.common;
 
 
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -19,7 +20,6 @@ public class ServiceResult implements Serializable {
      * 返回的信息是否展示;true 前端要展示msg中的内容
      */
     private boolean flag = false;
-
 
     public ServiceResult() {
     }

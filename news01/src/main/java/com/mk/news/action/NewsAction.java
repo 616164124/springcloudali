@@ -1,12 +1,15 @@
 package com.mk.news.action;
 
+import com.com.bean.ObjectBean;
 import com.com.bean.User;
 import com.mk.common.ServiceResult;
+import com.mk.news.bo.UserBean;
 import com.mk.news.service.New01Service;
 import com.mk.news.service.New02Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +33,9 @@ public class NewsAction {
         log.info("new01===>" + port);
         User user = new User();
         user.setPassword("12331");
-        ServiceResult serviceResult = new01Service.get(user, "tokenss!!!");
+        ObjectBean objectBean = new ObjectBean();
+        objectBean.setData(user);
+        ServiceResult serviceResult = new01Service.get(objectBean, "tokenss!!!");
         serviceResult.setMsg(port);
         return serviceResult;
     }
@@ -49,9 +54,20 @@ public class NewsAction {
     @RequestMapping(value = "new03", method = RequestMethod.GET)
     public ServiceResult getUser03() {
         log.info("new01===>" + port);
-        User user = new User();
+        UserBean user = new UserBean();
         user.setPassword("12331");
         ServiceResult serviceResult = new02Service.get(user);
+        serviceResult.setMsg(port);
+        return ServiceResult.defaultSuccess();
+    }
+
+    @RequestMapping(value = "new04", method = RequestMethod.GET)
+    public ServiceResult getUser04() {
+        log.info("new01===>" + port);
+        UserBean userBean = new UserBean();
+
+        userBean.setPassword("12331");
+        ServiceResult serviceResult = new02Service.get(userBean);
         serviceResult.setMsg(port);
         return ServiceResult.defaultSuccess();
     }

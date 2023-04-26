@@ -1,6 +1,5 @@
 package com.mk.user01.action;
 
-import com.com.bean.User;
 import com.mk.common.ServiceResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +19,11 @@ public class UserAction {
     private String port;
 
     @RequestMapping(value = "one", method = RequestMethod.POST)
-    public ServiceResult getUser01(HttpServletRequest request, @RequestBody User o) {
+    public ServiceResult getUser01(HttpServletRequest request, @RequestBody Object o) {
 //        int i =1/0;
         String token = request.getHeader("token");
         log.info(token+"===one===>" + port);
-        log.info(o.getPokid());
+
         return ServiceResult.successObject(port);
     }
 

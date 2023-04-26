@@ -3,6 +3,7 @@ package com.mk.news.service;
 
 import com.com.bean.User;
 import com.mk.common.ServiceResult;
+import com.mk.news.bo.UserBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface New02Service {
 
     @PostMapping("/asy/test01")
-    ServiceResult get(User user);
+    ServiceResult get(UserBean user);
 
 }

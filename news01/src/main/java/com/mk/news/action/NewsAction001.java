@@ -5,7 +5,6 @@ import cn.hutool.core.lang.Snowflake;
 import com.com.bean.User;
 import com.mk.common.CodeEnum;
 import com.mk.common.ServiceResult;
-import com.mk.news.bo.UserBo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,10 +49,10 @@ public class NewsAction001 {
     }
 
     @PostMapping(value = "/001/02")
-    public ServiceResult get02(@RequestBody @Validated UserBo userBo, HttpServletRequest request) {
-        log.info(userBo.toString() + "=======");
-        userBo.setId(new Snowflake().nextIdStr());
-        return ServiceResult.successObject(userBo);
+    public ServiceResult get02(@RequestBody @Validated User user, HttpServletRequest request) {
+        log.info(user.toString() + "=======");
+        user.setPokid(new Snowflake().nextIdStr());
+        return ServiceResult.successObject(user);
     }
 
 }

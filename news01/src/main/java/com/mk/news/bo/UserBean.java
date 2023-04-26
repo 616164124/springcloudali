@@ -1,5 +1,6 @@
 package com.mk.news.bo;
 
+import com.com.bean.ObjectBean;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author hua
  */
 @Data
-public class UserBo {
+public class UserBean extends ObjectBean {
     @NotBlank(message = "不能为空！")
     private String id;
     @Pattern(regexp = "^[A-Za-z0-9]+$",message = "只能是数字和字母")
